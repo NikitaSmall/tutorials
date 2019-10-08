@@ -1,0 +1,5 @@
+application/json (see GraphQLInvocation -> GraphQLContoller)
+POST localhost:8080/graphql
+{
+	"query":"{\n  bookById(id: \"book-1\"){\n    id\n    name\n    pageCount\n    author {\n      firstName\n      lastName\n    }\n  }\n}"
+}
