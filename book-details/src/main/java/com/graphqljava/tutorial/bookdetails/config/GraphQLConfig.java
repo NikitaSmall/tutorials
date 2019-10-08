@@ -43,6 +43,4 @@ public class GraphQLConfig {
                         .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher()))
                 .build();
     }
-
-
 }
