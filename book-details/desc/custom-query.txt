@@ -1,0 +1,14 @@
+text/plain
+POST localhost:8080/custom/graphql
+
+{
+  bookById(id: "2"){
+    id
+    name
+    pageCount
+    author {
+      firstName
+      lastName
+    }
+  }
+}
