@@ -1,6 +1,7 @@
 package com.graphqljava.tutorial.bookdetails.config;
 
 import com.graphqljava.tutorial.bookdetails.fetchers.GraphQLFetcher;
+import com.graphqljava.tutorial.bookdetails.mutators.GraphQLMutator;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -22,6 +23,8 @@ public class GraphQLConfig {
     private static final SchemaGenerator SCHEMA_GENERATOR = new SchemaGenerator();
     @Autowired
     private List<GraphQLFetcher> graphQLFetchers;
+    @Autowired
+    private List<GraphQLMutator> graphQLMutators;
 
     @Bean
     public GraphQL graphQL() {
@@ -43,6 +46,13 @@ public class GraphQLConfig {
                     .type(newTypeWiring(fetcher.typeName())
                             .dataFetcher(fetcher.fieldName(), fetcher.dataFetcher()));
         }
+
+        for (GraphQLMutator mutator : graphQLMutators) {
+            wiring = wiring
+                    .type(newTypeWiring(mutator.typeName())
+                            .dataFetcher(mutator.mutationName(), mutator.dataFetcher()));
+        }
+
         return wiring.build();
     }
 }
