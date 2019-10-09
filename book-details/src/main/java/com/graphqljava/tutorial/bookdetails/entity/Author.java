@@ -56,4 +56,9 @@ public class Author {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName);
     }
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
