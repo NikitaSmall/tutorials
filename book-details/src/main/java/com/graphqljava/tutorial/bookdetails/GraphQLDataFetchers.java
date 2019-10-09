@@ -1,28 +1,24 @@
 package com.graphqljava.tutorial.bookdetails;
 
-import com.google.common.collect.ImmutableMap;
-import com.graphqljava.tutorial.bookdetails.repository.graphql.GraphQLAuthorRepo;
-import com.graphqljava.tutorial.bookdetails.repository.graphql.GraphQLBookRepo;
+import com.graphqljava.tutorial.bookdetails.entity.Author;
+import com.graphqljava.tutorial.bookdetails.entity.Book;
+import com.graphqljava.tutorial.bookdetails.repository.graphql.GraphQLRepository;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @Component
 public class GraphQLDataFetchers {
     @Autowired
-    private GraphQLBookRepo bookRepo;
-    @Autowired
-    private GraphQLAuthorRepo authorRepo;
+    private GraphQLRepository graphQLRepository;
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
             String bookId = dataFetchingEnvironment.getArgument("id");
-            return bookRepo
-                    .findAll()
+            return graphQLRepository
+                    .findAll(Book.class)
                     .stream()
                     .filter(book -> book.get("id").equals(bookId))
                     .findFirst()
@@ -34,8 +30,8 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> {
             Map<String, String> book = dataFetchingEnvironment.getSource();
             String authorId = book.get("authorId");
-            return authorRepo
-                    .findAll()
+            return graphQLRepository
+                    .findAll(Author.class)
                     .stream()
                     .filter(author -> author.get("id").equals(authorId))
                     .findFirst()
