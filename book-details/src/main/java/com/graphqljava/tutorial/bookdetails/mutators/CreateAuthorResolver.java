@@ -1,4 +1,4 @@
-package com.graphqljava.tutorial.bookdetails.fetchers;
+package com.graphqljava.tutorial.bookdetails.mutators;
 
 import com.graphqljava.tutorial.bookdetails.entity.Author;
 import com.graphqljava.tutorial.bookdetails.repository.AuthorRepository;
@@ -7,18 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateAuthorResolver implements GraphQLFetcher {
+public class CreateAuthorResolver implements GraphQLMutator {
     @Autowired
     private AuthorRepository authorRepository;
 
     @Override
-    public String fieldName() {
+    public String mutationName() {
         return "createAuthor";
-    }
-
-    @Override
-    public String typeName() {
-        return "Query";
     }
 
     @Override

@@ -1,7 +1,10 @@
+type Mutation {
+    createAuthor(firstName: String, lastName: String): Author
+}
+
 type Query {
     bookById(id: ID): Book
     bookByPageCount(pageCount: Int): [Book]
-    createAuthor(firstName: String, lastName: String): Author
 }
 
 type Book {
