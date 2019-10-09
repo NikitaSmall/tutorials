@@ -1,7 +1,10 @@
 package com.graphqljava.tutorial.bookdetails;
 
 import com.google.common.collect.ImmutableMap;
+import com.graphqljava.tutorial.bookdetails.repository.graphql.GraphQLAuthorRepo;
+import com.graphqljava.tutorial.bookdetails.repository.graphql.GraphQLBookRepo;
 import graphql.schema.DataFetcher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -10,38 +13,16 @@ import java.util.Map;
 
 @Component
 public class GraphQLDataFetchers {
-
-    private static List<Map<String, String>> books = Arrays.asList(
-            ImmutableMap.of("id", "book-1",
-                    "name", "Harry Potter and the Philosopher's Stone",
-                    "pageCount", "223",
-                    "authorId", "author-1"),
-            ImmutableMap.of("id", "book-2",
-                    "name", "Moby Dick",
-                    "pageCount", "635",
-                    "authorId", "author-2"),
-            ImmutableMap.of("id", "book-3",
-                    "name", "Interview with the vampire",
-                    "pageCount", "371",
-                    "authorId", "author-3")
-    );
-
-    private static List<Map<String, String>> authors = Arrays.asList(
-            ImmutableMap.of("id", "author-1",
-                    "firstName", "Joanne",
-                    "lastName", "Rowling"),
-            ImmutableMap.of("id", "author-2",
-                    "firstName", "Herman",
-                    "lastName", "Melville"),
-            ImmutableMap.of("id", "author-3",
-                    "firstName", "Anne",
-                    "lastName", "Rice")
-    );
+    @Autowired
+    private GraphQLBookRepo bookRepo;
+    @Autowired
+    private GraphQLAuthorRepo authorRepo;
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
             String bookId = dataFetchingEnvironment.getArgument("id");
-            return books
+            return bookRepo
+                    .findAll()
                     .stream()
                     .filter(book -> book.get("id").equals(bookId))
                     .findFirst()
@@ -53,7 +34,8 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> {
             Map<String, String> book = dataFetchingEnvironment.getSource();
             String authorId = book.get("authorId");
-            return authors
+            return authorRepo
+                    .findAll()
                     .stream()
                     .filter(author -> author.get("id").equals(authorId))
                     .findFirst()

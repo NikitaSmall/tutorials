@@ -1,5 +1,6 @@
 package com.graphqljava.tutorial.bookdetails.entity;
 
+import com.graphqljava.tutorial.bookdetails.graphql.mappings.GraphQLMappable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +24,13 @@ import static org.hibernate.annotations.FetchMode.SUBSELECT;
 public class Author {
     @Id
     @GeneratedValue
+    @GraphQLMappable
     private Integer id;
 
+    @GraphQLMappable
     private String firstName;
 
+    @GraphQLMappable
     private String lastName;
 
     @OneToMany(fetch = EAGER, mappedBy = "author") //todo: yeah
