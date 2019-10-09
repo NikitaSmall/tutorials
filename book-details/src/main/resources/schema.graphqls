@@ -1,5 +1,6 @@
 type Query {
     bookById(id: ID): Book
+    bookByPageCount(pageCount: Int): [Book]
 }
 
 type Book {
