@@ -5,13 +5,14 @@ import com.graphqljava.tutorial.bookdetails.entity.Author;
 import com.graphqljava.tutorial.bookdetails.repository.AuthorRepository;
 import com.graphqljava.tutorial.bookdetails.services.interfaces.AuthorService;
 import graphql.schema.DataFetcher;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class CreateAuthorResolver implements GraphQLMutator {
-    @Autowired
-    private AuthorService authorService;
+    private final AuthorService authorService;
 
     @Override
     public String mutationName() {
