@@ -1,3 +1,12 @@
 {
 	"query":"\n mutation CreateAuthor {\n createAuthor(firstName: \"Terry\", lastName: \"Pratchett\"){\n firstName\n lastName\n }\n }"
 }
+
+custom controller:
+
+mutation CreateAuthor {
+	createAuthor(firstName: "Terry", lastName: "Pratchett") {
+		firstName
+		lastName
+	}
+}

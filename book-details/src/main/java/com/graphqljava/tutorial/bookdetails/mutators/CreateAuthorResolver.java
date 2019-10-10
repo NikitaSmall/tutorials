@@ -1,7 +1,9 @@
 package com.graphqljava.tutorial.bookdetails.mutators;
 
+import com.graphqljava.tutorial.bookdetails.dto.service.author.CreateAuthorDto;
 import com.graphqljava.tutorial.bookdetails.entity.Author;
 import com.graphqljava.tutorial.bookdetails.repository.AuthorRepository;
+import com.graphqljava.tutorial.bookdetails.services.interfaces.AuthorService;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateAuthorResolver implements GraphQLMutator {
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
 
     @Override
     public String mutationName() {
@@ -21,7 +23,7 @@ public class CreateAuthorResolver implements GraphQLMutator {
         return environment -> {
             String firstName = environment.getArgument("firstName");
             String lastName = environment.getArgument("lastName");
-            return authorRepository.save(new Author(firstName, lastName));
+            return authorService.createAuthor(new CreateAuthorDto(firstName, lastName));
         };
     }
 }
