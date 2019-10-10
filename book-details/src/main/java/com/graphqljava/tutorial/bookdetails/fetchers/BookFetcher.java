@@ -1,14 +1,17 @@
 package com.graphqljava.tutorial.bookdetails.fetchers;
 
 import com.graphqljava.tutorial.bookdetails.repository.BookRepository;
+import com.graphqljava.tutorial.bookdetails.services.interfaces.BookService;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static java.lang.Integer.parseInt;
+
 @Component
 public class BookFetcher implements GraphQLFetcher {
     @Autowired
-    private BookRepository bookRepository;
+    private BookService bookService;
 
     @Override
     public String fieldName() {
@@ -24,7 +27,7 @@ public class BookFetcher implements GraphQLFetcher {
     public DataFetcher dataFetcher() {
         return environment -> {
             String bookId = environment.getArgument("id");
-            return bookRepository.findById(Integer.parseInt(bookId));
+            return bookService.findById(parseInt(bookId));
         };
     }
 }

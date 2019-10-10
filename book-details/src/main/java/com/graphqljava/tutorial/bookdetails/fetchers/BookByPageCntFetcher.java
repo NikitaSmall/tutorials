@@ -1,6 +1,6 @@
 package com.graphqljava.tutorial.bookdetails.fetchers;
 
-import com.graphqljava.tutorial.bookdetails.repository.BookRepository;
+import com.graphqljava.tutorial.bookdetails.services.interfaces.BookService;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookByPageCntFetcher implements GraphQLFetcher {
     @Autowired
-    private BookRepository bookRepository;
+    private BookService bookService;
 
     @Override
     public String fieldName() {
@@ -24,7 +24,7 @@ public class BookByPageCntFetcher implements GraphQLFetcher {
     public DataFetcher dataFetcher() {
         return environment -> {
             int pageCnt = environment.getArgument("pageCount");
-            return bookRepository.findByPageCount(pageCnt);
+            return bookService.findByPageCount(pageCnt);
         };
     }
 }
