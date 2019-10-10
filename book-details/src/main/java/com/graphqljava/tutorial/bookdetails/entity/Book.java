@@ -31,4 +31,8 @@ public class Book {
     public static Book noAuthorBook(String name, Integer pageCount) {
         return new Book(null, name, pageCount, null, null);
     }
+
+    public static Book book(Integer id, String name, Integer pageCount, Author author) {
+        return new Book(id, name, pageCount, author, null);
+    }
 }

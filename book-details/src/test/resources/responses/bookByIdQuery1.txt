@@ -1,0 +1,1 @@
+{data={bookById={id=1, name=name, pageCount=1000, author={firstName=aaa, lastName=bbb}}}}
