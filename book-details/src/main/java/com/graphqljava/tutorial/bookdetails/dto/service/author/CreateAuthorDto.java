@@ -8,4 +8,8 @@ import lombok.Data;
 public class CreateAuthorDto {
     public String firstName;
     public String lastName;
+
+    public static CreateAuthorDto dto(String firstName, String lastName) {
+        return new CreateAuthorDto(firstName, lastName);
+    }
 }

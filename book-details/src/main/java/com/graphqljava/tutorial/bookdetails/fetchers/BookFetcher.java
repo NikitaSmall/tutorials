@@ -1,6 +1,5 @@
 package com.graphqljava.tutorial.bookdetails.fetchers;
 
-import com.graphqljava.tutorial.bookdetails.repository.BookRepository;
 import com.graphqljava.tutorial.bookdetails.services.interfaces.BookService;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;

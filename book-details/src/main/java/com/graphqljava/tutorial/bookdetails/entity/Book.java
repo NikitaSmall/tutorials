@@ -27,4 +27,8 @@ public class Book {
 
     @Column(name = "author_id")
     private Integer authorId;
+
+    public static Book noAuthorBook(String name, Integer pageCount) {
+        return new Book(null, name, pageCount, null, null);
+    }
 }

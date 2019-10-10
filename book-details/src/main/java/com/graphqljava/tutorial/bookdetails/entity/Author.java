@@ -3,6 +3,7 @@ package com.graphqljava.tutorial.bookdetails.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.Entity;
@@ -60,5 +61,9 @@ public class Author {
     public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public static Author author(String firstName, String lastName) {
+        return new Author(firstName, lastName);
     }
 }
